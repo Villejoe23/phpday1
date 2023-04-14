@@ -7,6 +7,7 @@ $color[] = 'RED';
 $color[] = 'BLUE'
 $color[] = 'GREEN';
 $color[] = 'PINK';
+$color[] = 'violet';
 echo var_($color);
 
 ?>
