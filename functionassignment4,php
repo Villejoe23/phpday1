@@ -1,0 +1,87 @@
+<?php
+
+include ('assign4connection.php');
+
+if (isset($_POST['Confirm'])){
+    
+    $FirstName= test_input ($_POST['FirstName']);
+    $MiddleName= test_input ($_POST['MiddleName']);
+    $LastName= test_input ($_POST['LastName']);
+    $Email= test_input ($_POST['Email']);
+    $Password= ($_POST['Password']);
+    $psw_repeat= ($_POST['psw_repeat']);
+     
+    $pattern="/.^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^*&]).{6,12}$./";
+
+    if($Password != $psw_repeat){
+        echo "Your password does not match!!!";
+        return;
+    }elseif(!preg_match ($pattern, $Password)) {
+        echo "Password format invalid";
+        return;
+    }else{
+        echo "SUCCESS!!!";
+        $query = "INSERT INTO user (FirstName, MiddleName, LastName, Email, Password) VALUES ('?, '?', '?', '?', '?')";
+        // mysqli_query ($con, $query);
+        $res = mysqli_query ($con, $query);
+        if (!$res) {
+            echo "Error";
+        }
+    } else  
+        $mysql = "select" from user whare email = ? and status = 'Active'";
+
+        $mystmt = mysqli_stmt_init($db) ;
+
+        // Prepare the statement
+    If(!mysql_stmt_prepare($stmt, $sql)){
+        echo "SQL Statement failed.";
+
+        return;
+
+    } else {
+        // Bind parameters to the placeholders
+        mysqli_stmt_bind_param($stmt, "s"
+    $email);    // Run parameters inside database
+
+    mysql_stmt_execute($stmt);
+
+        // Put data into return variable
+        $result = mysqli_stmt_get_result($stmt);
+
+    if(mysqli_num_rows(#result) !=NULL) {   
+    $row = mysqli_fetch_assoc(result);
+            // compared password submission through password_verify
+            // $password
+            $dbpassword = $row['password'];
+        
+    if(password_verify($password, $dbpassword) == TRUE){
+
+            // Set session variables
+
+            $_SESSION['signin_success'] = "signin_success";
+            $_SESSION[''id'] =  $row['id'];
+            $_SESSION['firstname'] = $row['firstname'];
+            $_SESSION['lastname'] = $row['lastname'];
+            $_SESSION['middename'] = $row['middlename'];
+
+            // Redirect to home page
+
+            header("Location: index.php");
+
+        
+
+    // echo $password;
+    }
+    
+function test_input ($data){
+    $data = trim($data); //remove all tabs, spaces
+    $strips = stripslashes($data); //removes slashes(backslash)
+    $data = htmlspecialchars($data); //removes all scripts
+
+    return $data;
+}
+
+
+
+
+?>
