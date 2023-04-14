@@ -8,7 +8,7 @@
 </head>
 <body>
     <?php
-
+ $ville = $_POST['username'];
     for(counter = 1; $counter ,<= 12; $counter++) {
         $total = $counter *2;
         echo $total . "<br>" ;
